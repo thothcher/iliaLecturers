@@ -1,0 +1,73 @@
+const apiUrl = "https://68e010a393207c4b479399ed.mockapi.io/lecturers";
+const container = document.getElementById("lecturers");
+
+// Fetch lecturers from API
+async function loadLecturers() {
+  const res = await fetch(apiUrl);
+  const lecturers = await res.json();
+  renderLecturers(lecturers);
+}
+
+// Render cards
+function renderLecturers(lecturers) {
+  container.innerHTML = "";
+  lecturers.forEach(l => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${l.image}" alt="${l.name}">
+      <h2>${l.name}</h2>
+      <p><em>${l.faculty}</em></p>
+      <p>⭐ ${l.avgScore}/10</p>
+      <div class="comments">
+        ${l.comments.slice(-3).map(c => `<p>💬 ${c}</p>`).join("")}
+      </div>
+      <form data-id="${l.id}">
+        <input type="range" min="0" max="10" value="5" name="rating">
+        <p class="rating-label">Rating: 5</p>
+        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    `;
+
+    // Handle range input change
+    const range = card.querySelector("input[type=range]");
+    const label = card.querySelector(".rating-label");
+    range.addEventListener("input", () => {
+      label.textContent = `Rating: ${range.value}`;
+    });
+
+    // Handle form submit
+    const form = card.querySelector("form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const rating = parseInt(form.rating.value);
+      const comment = form.comment.value;
+
+      const updatedRatings = [...l.rating, rating];
+      const avgScore = (
+        updatedRatings.reduce((a, b) => a + b, 0) / updatedRatings.length
+      ).toFixed(1);
+
+      const updatedLecturer = {
+        ...l,
+        rating: updatedRatings,
+        comments: [...l.comments, comment],
+        avgScore
+      };
+
+      await fetch(`${apiUrl}/${l.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedLecturer)
+      });
+
+      loadLecturers(); // Refresh list
+    });
+
+    container.appendChild(card);
+  });
+}
+
+// Init
+loadLecturers();
