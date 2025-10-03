@@ -22,13 +22,28 @@ body {
   background: #f5f5f5;
 
 }
-
 header {
   background: #2563eb;
   color: white;
   text-align: center;
   padding: 1rem;
 }
+
+.filters {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filters input, .filters select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
 
 .grid {
   display: grid;

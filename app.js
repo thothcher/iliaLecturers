@@ -1,20 +1,47 @@
 const apiUrl = "https://68e010a393207c4b479399ed.mockapi.io/lecturers";
 const container = document.getElementById("lecturers");
+const searchInput = document.getElementById("search");
+const facultyFilter = document.getElementById("facultyFilter");
+
+let lecturersData = []; // store all lecturers
+let filteredLecturers = []; // filtered list
 
 // Fetch lecturers from API
 async function loadLecturers() {
-  const res = await fetch(apiUrl);
-  const lecturers = await res.json();
-  renderLecturers(lecturers);
+    const res = await fetch(apiUrl);
+    lecturersData = await res.json();
+
+    // Populate faculty dropdown
+    const faculties = [...new Set(lecturersData.map(l => l.faculty))];
+    facultyFilter.innerHTML = `<option value="all">All Faculties</option>`;
+    faculties.forEach(f => {
+        facultyFilter.innerHTML += `<option value="${f}">${f}</option>`;
+    });
+
+    applyFilters();
 }
 
-// Render cards
-function renderLecturers(lecturers) {
-  container.innerHTML = "";
-  lecturers.forEach(l => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
+// Apply search + filter
+function applyFilters() {
+    const searchValue = searchInput.value.toLowerCase();
+    const facultyValue = facultyFilter.value;
+
+    filteredLecturers = lecturersData.filter(l => {
+        const matchesName = l.name.toLowerCase().includes(searchValue);
+        const matchesFaculty = facultyValue === "all" || l.faculty === facultyValue;
+        return matchesName && matchesFaculty;
+    });
+
+    renderLecturers(filteredLecturers);
+}
+
+// Render lecturer cards
+function renderLecturers(list) {
+    container.innerHTML = "";
+    list.forEach(l => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
       <img src="${l.image}" alt="${l.name}">
       <h2>${l.name}</h2>
       <p><em>${l.faculty}</em></p>
@@ -30,44 +57,48 @@ function renderLecturers(lecturers) {
       </form>
     `;
 
-    // Handle range input change
-    const range = card.querySelector("input[type=range]");
-    const label = card.querySelector(".rating-label");
-    range.addEventListener("input", () => {
-      label.textContent = `Rating: ${range.value}`;
+        // Range slider label update
+        const range = card.querySelector("input[type=range]");
+        const label = card.querySelector(".rating-label");
+        range.addEventListener("input", () => {
+            label.textContent = `Rating: ${range.value}`;
+        });
+
+        // Form submit
+        const form = card.querySelector("form");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const rating = parseInt(form.rating.value);
+            const comment = form.comment.value;
+
+            const updatedRatings = [...l.rating, rating];
+            const avgScore = (
+                updatedRatings.reduce((a, b) => a + b, 0) / updatedRatings.length
+            ).toFixed(1);
+
+            const updatedLecturer = {
+                ...l,
+                rating: updatedRatings,
+                comments: [...l.comments, comment],
+                avgScore
+            };
+
+            await fetch(`${apiUrl}/${l.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedLecturer)
+            });
+
+            loadLecturers(); // Refresh
+        });
+
+        container.appendChild(card);
     });
-
-    // Handle form submit
-    const form = card.querySelector("form");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const rating = parseInt(form.rating.value);
-      const comment = form.comment.value;
-
-      const updatedRatings = [...l.rating, rating];
-      const avgScore = (
-        updatedRatings.reduce((a, b) => a + b, 0) / updatedRatings.length
-      ).toFixed(1);
-
-      const updatedLecturer = {
-        ...l,
-        rating: updatedRatings,
-        comments: [...l.comments, comment],
-        avgScore
-      };
-
-      await fetch(`${apiUrl}/${l.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedLecturer)
-      });
-
-      loadLecturers(); // Refresh list
-    });
-
-    container.appendChild(card);
-  });
 }
+
+// Event listeners for filters
+searchInput.addEventListener("input", applyFilters);
+facultyFilter.addEventListener("change", applyFilters);
 
 // Init
 loadLecturers();
