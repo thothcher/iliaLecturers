@@ -3,6 +3,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: none;
+  border: none;
+  list-style: none;
+  text-decoration: none;
+}
+
+button,
+input,
+label {
+  cursor: pointer;
 }
 
 body {
@@ -17,10 +27,13 @@ body {
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #1e40af, #2563eb);
+  background: #8C1E1F;
   color: white;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header h1 {
@@ -54,7 +67,7 @@ header .subtitle {
 .filters input:focus,
 .filters select:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
 }
 
 /* Grid Layout */
@@ -63,14 +76,16 @@ header .subtitle {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 2rem 3rem;
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* Lecturer Card */
 .card {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -80,7 +95,7 @@ header .subtitle {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .card img {
@@ -159,7 +174,7 @@ form textarea {
 
 form textarea:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 form button {
@@ -195,6 +210,7 @@ footer {
   header h1 {
     font-size: 1.5rem;
   }
+
   .filters {
     flex-direction: column;
     align-items: center;
