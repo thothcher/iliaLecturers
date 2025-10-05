@@ -25,50 +25,54 @@
     </header>
 
 
-    <main class="form-container">
-        <form id="addLecturerForm">
-            <label>
-                Lecturer Name:
-                <input type="text" id="name" required>
-            </label>
+    <main>
 
-            <label>
-                Faculty:
-                <select id="faculty" required>
-                    <option value="" disabled selected>Select faculty</option>
-                    <option value="Psychology">Psychology</option>
-                    <option value="Law">Law</option>
-                    <option value="Business">Business</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Education">Education</option>
-                    <option value="Political Science">Political Science</option>
-                    <option value="Other">Other</option>
-                </select>
-            </label>
-            <label>
-                Image Link (URL):
-                <input type="url" id="imageUrl" placeholder="https://example.com/photo.jpg">
-            </label>
+        <section class="form-container">
+            <form id="addLecturerForm">
+                <label>
+                    Lecturer Name:
+                    <input type="text" id="name" required>
+                </label>
 
-            <label>
+                <label>
+                    Faculty:
+                    <select id="faculty" required>
+                        <option value="" disabled selected>Select faculty</option>
+                        <option value="Psychology">Psychology</option>
+                        <option value="Law">Law</option>
+                        <option value="Business">Business</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Education">Education</option>
+                        <option value="Political Science">Political Science</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+                <label>
+                    Image Link (URL):
+                    <input type="url" id="imageUrl" placeholder="https://example.com/photo.jpg">
+                </label>
+
+                <!-- <label>
                 Or Upload Image:
                 <input type="file" id="imageFile" accept="image/*">
-            </label>
+            </label> -->
 
-            <label>
-                Initial Comments (comma-separated):
-                <textarea id="comments" placeholder="Good lecturer,Very helpful,Strict exams"></textarea>
-            </label>
-            <label>
-                Initial Rating:
-                <input type="range" id="rating" min="0" max="10" value="5" step="0.1">
-                <span id="ratingValue">5</span>
-            </label>
+                <label>
+                    Initial Comments (comma-separated):
+                    <textarea id="comments" placeholder="Good lecturer,Very helpful,Strict exams"></textarea>
+                </label>
+                <label>
+                    Initial Rating:
+                    <input type="range" id="rating" min="0" max="10" value="5" step="0.1">
+                    <span id="ratingValue">5</span>
+                </label>
 
-            <button type="submit">Add Lecturer</button>
+                <button type="submit">Add Lecturer</button>
 
-        </form>
-        <p id="status"></p>
+            </form>
+            <p id="status"></p>
+
+        </section>
     </main>
     <footer>
         <p>© 2025 Ilia State University • Student Feedback Platform</p>
