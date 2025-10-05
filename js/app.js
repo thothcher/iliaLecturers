@@ -82,6 +82,16 @@ function setupCardEvents(card, lecturer) {
     label.textContent = `Rating: ${range.value}`;
   });
 
+  // Check if user already reviewed this lecturer
+  const reviewedLecturers = JSON.parse(localStorage.getItem("reviewedLecturers")) || [];
+  if (reviewedLecturers.includes(lecturer.id)) {
+    form.querySelector("textarea").disabled = true;
+    range.disabled = true;
+    form.querySelector("button").disabled = true;
+    form.insertAdjacentHTML("beforeend", `<p style="color:gray;font-size:0.9em;">⚠ You already reviewed this lecturer.</p>`);
+    return;
+  }
+
   // Handle review submission
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -109,6 +119,11 @@ function setupCardEvents(card, lecturer) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedLecturer)
       });
+
+      // ✅ Save lecturer ID in localStorage
+      reviewedLecturers.push(lecturer.id);
+      localStorage.setItem("reviewedLecturers", JSON.stringify(reviewedLecturers));
+
       loadLecturers();
     } catch (err) {
       console.error("Error submitting review:", err);

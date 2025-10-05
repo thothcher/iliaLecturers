@@ -38,6 +38,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 25px -5px, rgba(0, 0, 0, 0.02) 0px 10px 10px -8px;
 }
 
 header>a img {
@@ -121,7 +123,7 @@ header .subtitle {
 .card {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -193,6 +195,7 @@ form {
 form input[type="range"] {
   width: 100%;
   margin-top: 0.5rem;
+  padding: 0 !important;
 }
 
 form .rating-label {
@@ -216,7 +219,7 @@ form textarea {
 
 form textarea:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
 form button {
