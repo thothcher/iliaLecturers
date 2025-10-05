@@ -36,6 +36,14 @@ header {
   justify-content: space-between;
 }
 
+header> a img {
+  transition: transform 0.3s ease-in-out;
+}
+
+header> a img:hover {
+  transform: rotateY(360deg) scale(1.01);
+}
+
 header h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -235,59 +243,47 @@ footer {
 
 
 
-/*-------------------- add --------------------*/
-.form-container {
-  max-width: 500px;
-  margin: 2rem auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
+/*-------------------- loader --------------------*/
 
-form {
+.loader-co {
+  height: 50vh;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
-form label {
+.loader {
   display: flex;
-  flex-direction: column;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #374151;
+  align-items: center;
+  transform: scale(1.5);
 }
 
-form input[type="text"],
-form input[type="url"],
-form input[type="file"] {
-  margin-top: 0.3rem;
-  padding: 0.6rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
+.bar {
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  background-color: rgba(140, 30, 31, .5) ;
+  border-radius: 10px;
+  animation: scale-up4 1s linear infinite;
 }
 
-form button {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: #2563eb;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
+.bar:nth-child(2) {
+  height: 35px;
+  margin: 0 5px;
+  animation-delay: .25s;
 }
 
-form button:hover {
-  background: #1e40af;
+.bar:nth-child(3) {
+  animation-delay: .5s;
 }
 
-#status {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
+@keyframes scale-up4 {
+  20% {
+    background-color: #8C1E1F;
+    transform: scaleY(1.5);
+  }
+
+  40% {
+    transform: scaleY(1);
+  }
 }

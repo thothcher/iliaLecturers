@@ -2,6 +2,7 @@ const apiUrl = "https://68e010a393207c4b479399ed.mockapi.io/lecturers";
 const container = document.getElementById("lecturers");
 const searchInput = document.getElementById("search");
 const facultyFilter = document.getElementById("facultyFilter");
+const loader = document.querySelector(".loader-co");
 
 let lecturersData = [];
 let filteredLecturers = [];
@@ -17,6 +18,8 @@ async function loadLecturers() {
   faculties.forEach(f => {
     facultyFilter.innerHTML += `<option value="${f}">${f}</option>`;
   });
+
+  loader.remove()
 
   applyFilters();
 }
