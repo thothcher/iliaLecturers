@@ -1,46 +1,47 @@
 const apiUrl = "https://68e010a393207c4b479399ed.mockapi.io/lecturers";
+
+// Elements
 const container = document.getElementById("lecturers");
-const searchInput = document.getElementById("search");
+const searchInput = document.getElementById("searchInput");
 const facultyFilter = document.getElementById("facultyFilter");
+const ratingFilter = document.getElementById("ratingFilter");
+const ratingFilterValue = document.getElementById("ratingFilterValue");
 const loader = document.querySelector(".loader-co");
 
 let lecturersData = [];
 let filteredLecturers = [];
 
-// Fetch lecturers
+// ======================
+// Fetch & Init
+// ======================
 async function loadLecturers() {
-  const res = await fetch(apiUrl);
-  lecturersData = await res.json();
+  try {
+    const res = await fetch(apiUrl);
+    lecturersData = await res.json();
 
-  // Populate faculty dropdown
-  const faculties = [...new Set(lecturersData.map(l => l.faculty))].sort();
+    populateFacultyDropdown(lecturersData);
+    loader.remove();
+    applyFilters();
+  } catch (err) {
+    console.error("Error loading lecturers:", err);
+    container.innerHTML = `<p style="text-align:center;color:red">❌ Failed to load lecturers.</p>`;
+  }
+}
+
+// ======================
+// UI Helpers
+// ======================
+function populateFacultyDropdown(data) {
+  const faculties = [...new Set(data.map(l => l.faculty))].sort();
   facultyFilter.innerHTML = `<option value="all">All Faculties</option>`;
   faculties.forEach(f => {
     facultyFilter.innerHTML += `<option value="${f}">${f}</option>`;
   });
-
-  loader.remove()
-
-  applyFilters();
 }
 
-// Apply search + filter
-function applyFilters() {
-  const searchValue = searchInput.value.toLowerCase();
-  const facultyValue = facultyFilter.value;
-
-  filteredLecturers = lecturersData.filter(l => {
-    const matchesName = l.name.toLowerCase().includes(searchValue);
-    const matchesFaculty = facultyValue === "all" || l.faculty === facultyValue;
-    return matchesName && matchesFaculty;
-  });
-
-  renderLecturers(filteredLecturers);
-}
-
-// Render lecturer cards
 function renderLecturers(list) {
   container.innerHTML = "";
+
   if (list.length === 0) {
     container.innerHTML = `<p style="text-align:center;width:100%">No lecturers found.</p>`;
     return;
@@ -66,48 +67,85 @@ function renderLecturers(list) {
       </form>
     `;
 
-    // Update rating label
-    const range = card.querySelector("input[type=range]");
-    const label = card.querySelector(".rating-label");
-    range.addEventListener("input", () => {
-      label.textContent = `Rating: ${range.value}`;
-    });
-
-    // Handle form submit
-    const form = card.querySelector("form");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const rating = parseInt(form.rating.value);
-      const comment = form.comment.value;
-
-      const updatedRatings = [...l.rating, rating];
-      const avgScore = (
-        updatedRatings.reduce((a, b) => a + b, 0) / updatedRatings.length
-      ).toFixed(1);
-
-      const updatedLecturer = {
-        ...l,
-        rating: updatedRatings,
-        comments: [...l.comments, comment],
-        avgScore
-      };
-
-      await fetch(`${apiUrl}/${l.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedLecturer)
-      });
-
-      loadLecturers();
-    });
-
+    setupCardEvents(card, l);
     container.appendChild(card);
   });
 }
 
-// Events
+function setupCardEvents(card, lecturer) {
+  const range = card.querySelector("input[type=range]");
+  const label = card.querySelector(".rating-label");
+  const form = card.querySelector("form");
+
+  // Live update rating label
+  range.addEventListener("input", () => {
+    label.textContent = `Rating: ${range.value}`;
+  });
+
+  // Handle review submission
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const rating = parseInt(form.rating.value);
+    const comment = form.comment.value.trim();
+
+    if (!comment) return;
+
+    const updatedRatings = [...lecturer.rating, rating];
+    const avgScore = (
+      updatedRatings.reduce((a, b) => a + b, 0) / updatedRatings.length
+    ).toFixed(1);
+
+    const updatedLecturer = {
+      ...lecturer,
+      rating: updatedRatings,
+      comments: [...lecturer.comments, comment],
+      avgScore
+    };
+
+    try {
+      await fetch(`${apiUrl}/${lecturer.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedLecturer)
+      });
+      loadLecturers();
+    } catch (err) {
+      console.error("Error submitting review:", err);
+      alert("❌ Failed to submit review. Try again.");
+    }
+  });
+}
+
+// ======================
+// Filtering
+// ======================
+function applyFilters() {
+  const searchValue = searchInput.value.toLowerCase();
+  const facultyValue = facultyFilter.value;
+  const minRating = parseFloat(ratingFilter.value);
+
+  filteredLecturers = lecturersData.filter(l => {
+    const matchesName = l.name.toLowerCase().includes(searchValue);
+    const matchesFaculty = facultyValue === "all" || l.faculty === facultyValue;
+    const matchesRating = parseFloat(l.avgScore) >= minRating;
+    return matchesName && matchesFaculty && matchesRating;
+  });
+
+  renderLecturers(filteredLecturers);
+}
+
+// ======================
+// Event Listeners
+// ======================
 searchInput.addEventListener("input", applyFilters);
 facultyFilter.addEventListener("change", applyFilters);
+ratingFilter.addEventListener("input", () => {
+  ratingFilterValue.textContent = ratingFilter.value;
+  applyFilters();
+});
 
+// ======================
 // Init
+// ======================
 loadLecturers();
