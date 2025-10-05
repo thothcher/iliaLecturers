@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Lecturer Ratings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+
+        <a href="index.html">
+            <img src="https://iliauni.edu.ge/res/app/imgs/logos/1_.png" alt="Ilia">
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add.html">Add Lecturer</a>
+            <a href="contact.html">Contact us</a>
+        </nav>
+
+    </header>
+
+    <main class="form-container">
+        <form id="contactForm">
+            <label>
+                Your Email:
+                <input type="email" id="email" placeholder="you@example.com" required>
+            </label>
+
+            <label>
+                Title:
+                <input type="text" id="title" placeholder="Subject of your message" required>
+            </label>
+
+            <label>
+                Message:
+                <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </label>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <p id="status"></p>
+    </main>
+
+    <footer>
+        <p>© 2025 Ilia State University • Student Feedback Platform</p>
+    </footer>
+
+    <script src="js/contact.js"></script>
+</body>
+
+</html>
