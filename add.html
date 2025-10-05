@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Lecturer | Lecturer Ratings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+
+        <a href="index.html">
+            <img src="https://iliauni.edu.ge/res/app/imgs/logos/1_.png" alt="Ilia">
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add.html">Add Lecturer</a>
+        </nav>
+
+    </header>
+
+    <main class="form-container">
+        <form id="addLecturerForm">
+            <label>
+                Lecturer Name:
+                <input type="text" id="name" required>
+            </label>
+
+            <label>
+                Faculty:
+                <input type="text" id="faculty" placeholder="e.g. Psychology" required>
+            </label>
+
+            <label>
+                Image Link (URL):
+                <input type="url" id="imageUrl" placeholder="https://example.com/photo.jpg">
+            </label>
+
+            <label>
+                Or Upload Image:
+                <input type="file" id="imageFile" accept="image/*">
+            </label>
+
+            <button type="submit">Add Lecturer</button>
+        </form>
+
+        <p id="status"></p>
+    </main>
+
+    <footer>
+        <p>© 2025 Ilia State University • Student Feedback Platform</p>
+    </footer>
+
+
+    <script src="anti-inspect.js"></script>
+    <script src="add.js"></script>
+</body>
+
+</html>
