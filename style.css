@@ -276,7 +276,6 @@ form .rating-label {
 form textarea {
   width: 100%;
   resize: vertical;
-  margin-top: 0.5rem;
   padding: 0.6rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -400,6 +399,65 @@ select {
   padding: 0.5rem;
   border-radius: 6px;
 
+
+}
+
+
+#contactForm {
+  display: grid;
+  gap: 12px;
+}
+
+
+
+#contactForm .input-group-double {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* From Uiverse.io by alexruix */
+
+#contactForm .input-group {
+  position: relative;
+}
+
+
+#contactForm .input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #1c1b1b;
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+#contactForm .user-label {
+  position: absolute;
+  left: 15px;
+  color: #6e6d6d;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+#contactForm  .input:focus,
+input:valid {
+  outline: none;
+  border: 1.5px solid #1a73e8;
+}
+
+
+#contactForm .input:focus~label,
+#contactForm input:valid~label {
+  transform: translateY(-50%) scale(0.8);
+  background-color: #ffffff;
+  padding: 0 .2em;
+  color: #2196f3;
 }
 
 
@@ -408,13 +466,14 @@ select {
 /*-------------------- mobile --------------------*/
 
 
-.active-menu{
+.active-menu {
   top: 0 !important;
 }
+
 @media screen and (max-width: 768px) {
 
 
- 
+
   .toggle {
     display: flex;
   }
@@ -438,5 +497,5 @@ select {
 
     transition: 0.3s;
   }
-  
+
 }

@@ -35,18 +35,24 @@
 
     <main class="form-container">
         <form id="contactForm">
-            <label>
-                Your Email:
-                <input type="email" id="email" placeholder="you@example.com" required>
-            </label>
 
-            <label>
-                Title:
-                <input type="text" id="title" placeholder="Subject of your message" required>
-            </label>
 
+            <div class="input-group-double">
+
+                <!-- From Uiverse.io by alexruix -->
+                <div class="input-group">
+                    <input required="" name="text" id="email" autocomplete="off" class="input">
+                    <label class="user-label">Email</label>
+                </div>
+
+
+
+                <div class="input-group">
+                    <input required="" name="text" id="title" autocomplete="off" class="input">
+                    <label class="user-label">Subject</label>
+                </div>
+            </div>
             <label>
-                Message:
                 <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
             </label>
 
