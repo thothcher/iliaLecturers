@@ -164,3 +164,6 @@ ratingFilter.addEventListener("input", () => {
 // Init
 // ======================
 loadLecturers();
+
+
+
