@@ -33,7 +33,7 @@ async function loadLecturers() {
 // ======================
 function populateFacultyDropdown(data) {
   const faculties = [...new Set(data.map(l => l.faculty))].sort();
-  facultyFilter.innerHTML = `<option value="all">All Faculties</option>`;
+  facultyFilter.innerHTML = `<option value="all">ყველა ფაკულტეტი</option>`;
   faculties.forEach(f => {
     facultyFilter.innerHTML += `<option value="${f}">${f}</option>`;
   });

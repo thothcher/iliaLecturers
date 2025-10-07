@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Lecturer | Lecturer Ratings</title>
+    <title>დაამატე | ლექტორები</title>
     <link rel="shortcut icon" href="https://iliauni.edu.ge/favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,13 +13,13 @@
     <header>
 
         <a href="index.html">
-            <img src="https://iliauni.edu.ge/res/app/imgs/logos/1_.png" alt="Ilia">
+            <h2>ილიას ლექტორები</h2>
         </a>
 
         <nav>
-            <a href="index.html">Home</a>
-            <a href="add.html">Add Lecturer</a>
-            <a href="contact.html">Contact us</a>
+            <a href="index.html">მთავარი</a>
+            <a href="add.html">დაამატე ლექტორი</a>
+            <a href="contact.html">დაგვიკავშირდი</a>
         </nav>
 
 
@@ -39,27 +39,27 @@
         <section class="form-container">
             <form id="addLecturerForm">
                 <label>
-                    Lecturer Name:
+                    ლექტორის სახელი:
                     <input type="text" id="name" required>
                 </label>
 
                 
 
                 <label>
-                    Faculty:
+                    ფაკულტეტი:
                     <select id="faculty" required>
-                        <option value="" disabled selected>Select faculty</option>
-                        <option value="Psychology">Psychology</option>
-                        <option value="Law">Law</option>
-                        <option value="Business">Business</option>
-                        <option value="Computer Science">Computer Science</option>
+                        <option value="" disabled selected>აარჩიე ფაკულტეტი</option>
+                        <option value="Psychology">ფსიქოლოგია</option>
+                        <option value="Law">სამართალი</option>
+                        <option value="Business">ბიზნესი</option>
+                        <option value="Computer Science">კომპიუტერული მეცნიერება</option>
                         <option value="Education">Education</option>
-                        <option value="Political Science">Political Science</option>
-                        <option value="Other">Other</option>
+                        <option value="Political Science">პოლიტიკის მეცნიერება</option>
+                        <option value="Other">სხვა</option>
                     </select>
                 </label>
                 <label>
-                    Image Link (URL):
+                    სურათის ლინკი(URL):
                     <input type="url" id="imageUrl" placeholder="https://example.com/photo.jpg">
                 </label>
 
@@ -86,11 +86,12 @@
         </section>
     </main>
     <footer>
-        <p>© 2025 Ilia State University • Student Feedback Platform</p>
+        <p>© 2025 thothcher• Student Feedback Platform</p>
     </footer>
 
 
     <!-- <script src="anti-inspect.js"></script> -->
+     <script src="js/basics.js"></script>
     <script src="js/add.js"></script>
 </body>
 

@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Lecturer Ratings</title>
+    <title>დაგვიკავშირდი | ლექტორები</title>
+
+        <link rel="shortcut icon" href="https://iliauni.edu.ge/favicon.ico">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,13 +15,13 @@
     <header>
 
         <a href="index.html">
-            <img src="https://iliauni.edu.ge/res/app/imgs/logos/1_.png" alt="Ilia">
+            <h2>ილიას ლექტორები</h2>
         </a>
 
         <nav>
-            <a href="index.html">Home</a>
-            <a href="add.html">Add Lecturer</a>
-            <a href="contact.html">Contact us</a>
+            <a href="index.html">მთავარი</a>
+            <a href="add.html">დაამატე ლექტორი</a>
+            <a href="contact.html">დაგვიკავშირდი</a>
         </nav>
 
 
@@ -32,7 +35,6 @@
         </label>
 
     </header>
-
     <main class="form-container">
         <form id="contactForm">
 
@@ -42,30 +44,32 @@
                 <!-- From Uiverse.io by alexruix -->
                 <div class="input-group">
                     <input required="" name="text" id="email" autocomplete="off" class="input">
-                    <label class="user-label">Email</label>
+                    <label class="user-label">მეილი</label>
                 </div>
 
 
 
                 <div class="input-group">
                     <input required="" name="text" id="title" autocomplete="off" class="input">
-                    <label class="user-label">Subject</label>
+                    <label class="user-label">სათაური</label>
                 </div>
             </div>
             <label>
-                <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                <textarea id="message" rows="5" placeholder="შეიყვანე წერილი..." required></textarea>
             </label>
 
-            <button type="submit">Send Message</button>
+            <button type="submit">გაგზავნა</button>
         </form>
 
         <p id="status"></p>
     </main>
 
     <footer>
-        <p>© 2025 Ilia State University • Student Feedback Platform</p>
+        <p>© 2025 thothcher • Student Feedback Platform</p>
     </footer>
 
+
+    <script src="js/basics.js"></script>
     <script src="js/contact.js"></script>
 </body>
 
