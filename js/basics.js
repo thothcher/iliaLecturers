@@ -1,7 +1,7 @@
 
 let menuToggle = document.querySelector('.toggle');
 let nav = document.querySelector('nav');
-
-menuToggle.onclick = ()=>{
+console.log(menuToggle);
+menuToggle.addEventListener('click',()=>{
     nav.classList.toggle('active-menu');
-}
+}) 

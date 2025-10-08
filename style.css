@@ -488,7 +488,7 @@ select {
 #contactForm  .input:focus,
 input:valid {
   outline: none;
-  border: 1.5px solid #1a73e8;
+  border: 1.5px solid #d1d5db;
 }
 
 
