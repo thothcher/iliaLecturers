@@ -7,6 +7,8 @@
     <title>დაამატე | ლექტორები</title>
     <link rel="shortcut icon" href="https://iliauni.edu.ge/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <script src="js/anti-inspect.js"></script>
+
 </head>
 
 <body>
@@ -43,7 +45,7 @@
                     <input type="text" id="name" required>
                 </label>
 
-                
+
 
                 <label>
                     ფაკულტეტი:
@@ -62,10 +64,10 @@
                     <input type="url" id="imageUrl" placeholder="https://example.com/photo.jpg">
                 </label>
 
-                <!-- <label>
-                Or Upload Image:
-                <input type="file" id="imageFile" accept="image/*">
-            </label> -->
+                <label style="display: none;">
+                    Or Upload Image:
+                    <input type="file" id="imageFile" accept="image/*">
+                </label>
 
                 <label>
                     Initial Comments (comma-separated):
@@ -89,8 +91,7 @@
     </footer>
 
 
-    <!-- <script src="anti-inspect.js"></script> -->
-     <script src="js/basics.js"></script>
+    <script src="js/basics.js"></script>
     <script src="js/add.js"></script>
 </body>
 
